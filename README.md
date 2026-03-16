@@ -24,4 +24,4 @@ python3 sprinter.py transfer-all-shards --wallets-dir ./wallets --amount 0 --net
 ### 4. Notes
 
 - There is an exception so we our wallets in shard 1 stopped sending transactions in Window B of challenge #1. We will look at it later.
-- There might still be some issue need to be handled, we make this script in rush
+- There might still be some issues need to be handled, we make this script in rush
