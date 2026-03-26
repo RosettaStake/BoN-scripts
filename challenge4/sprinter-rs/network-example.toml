@@ -1,0 +1,12 @@
+# Network topology configuration for sprinter.
+#
+# proxy     - used for: nonce syncing, chain config, fund/check-wallets commands
+# observers - used for: broadcasting transactions (direct to shard observer)
+#             Falls back to proxy for any shard with an empty list.
+
+proxy = "gateway"
+
+[observers]
+shard0 = "obs0"
+shard1 = "obs1"
+shard2 = "obs2"
