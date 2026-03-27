@@ -1,0 +1,15 @@
+{
+  "name": "admin-spam-control-scripts",
+  "private": true,
+  "scripts": {
+    "build": "node -e \"console.log('JavaScript-only scripts: no build step required.')\"",
+    "check": "node check-env.js"
+  },
+  "dependencies": {
+    "@multiversx/sdk-core": "^15.3.2",
+    "@multiversx/sdk-network-providers": "^2.9.3",
+    "@multiversx/sdk-wallet": "^4.6.0",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1"
+  }
+}

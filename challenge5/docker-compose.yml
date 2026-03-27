@@ -1,0 +1,136 @@
+version: '3.8'
+
+x-agent-common: &agent-common
+  image: mvx-agent:latest
+  build:
+    context: .
+    dockerfile: Dockerfile
+  restart: unless-stopped
+  env_file:
+    - .env
+  command: >
+    sh -c '
+      export OPENCLAW_DISABLE_BONJOUR=1
+      sed -i "s/\"agentName\": \".*\"/\"agentName\": \"$$AGENT_NAME\"/g" /home/node/.openclaw/workspace/skills/multiversx/moltbot-starter-kit/agent.config.json &&
+      sed -i "s/\"agentName\": \".*\"/\"agentName\": \"$$AGENT_NAME\"/g" /home/node/.openclaw/workspace/skills/multiversx/moltbot-starter-kit/manifest.config.json &&
+      sed -i "s|MULTIVERSX_API_URL=.*|MULTIVERSX_API_URL=$$MULTIVERSX_API_URL|g" /home/node/.openclaw/workspace/skills/multiversx/moltbot-starter-kit/.env &&
+      sed -i "s|MULTIVERSX_CHAIN_ID=.*|MULTIVERSX_CHAIN_ID=$$MULTIVERSX_CHAIN_ID|g" /home/node/.openclaw/workspace/skills/multiversx/moltbot-starter-kit/.env &&
+      sed -i "s|IDENTITY_REGISTRY_ADDRESS=.*|IDENTITY_REGISTRY_ADDRESS=$$IDENTITY_REGISTRY_ADDRESS|g" /home/node/.openclaw/workspace/skills/multiversx/moltbot-starter-kit/.env &&
+      cd /app &&
+      if [ -n "$$CLAW_TELEGRAM_BOT_TOKEN" ] && [ "$$AGENT_NAME" = "mvx-agent-1" ]; then node openclaw.mjs config set channels.telegram.botToken "$$CLAW_TELEGRAM_BOT_TOKEN" && node openclaw.mjs config set channels.telegram.allowFrom "[\"*\"]" --strict-json && node openclaw.mjs config set channels.telegram.dmPolicy open; fi &&
+      if [ -n "$$OPENCLAW_MODEL" ]; then node openclaw.mjs config set agents.defaults.model.primary "$$OPENCLAW_MODEL"; fi &&
+      if [ -n "$$OPENCLAW_GATEWAY_TOKEN" ]; then node openclaw.mjs config set gateway.auth.mode token && node openclaw.mjs config set gateway.auth.token "$$OPENCLAW_GATEWAY_TOKEN"; fi &&
+      exec node openclaw.mjs gateway --allow-unconfigured
+    '
+
+services:
+  agent-1:  
+    <<: *agent-common
+    container_name: mvx-agent-1
+    ports:
+      - "3001:3001"
+      - "3002:3002"
+      - "18789:18789"
+    environment:
+      - AGENT_NAME=mvx-agent-1
+    volumes:
+      - ./wallets/mvx-agent-1.pem:/home/node/.openclaw/workspace/skills/multiversx/moltbot-starter-kit/wallet.pem
+
+  agent-2:
+    <<: *agent-common
+    container_name: mvx-agent-2
+    ports:
+      - "3003:3001"
+      - "3004:3002"
+    environment:
+      - AGENT_NAME=mvx-agent-2
+    volumes:
+      - ./wallets/mvx-agent-2.pem:/home/node/.openclaw/workspace/skills/multiversx/moltbot-starter-kit/wallet.pem
+
+  agent-3:
+    <<: *agent-common
+    container_name: mvx-agent-3
+    ports:
+      - "3005:3001"
+      - "3006:3002"
+    environment:
+      - AGENT_NAME=mvx-agent-3
+    volumes:
+      - ./wallets/mvx-agent-3.pem:/home/node/.openclaw/workspace/skills/multiversx/moltbot-starter-kit/wallet.pem
+
+  agent-4:
+    <<: *agent-common
+    container_name: mvx-agent-4
+    ports:
+      - "3007:3001"
+      - "3008:3002"
+    environment:
+      - AGENT_NAME=mvx-agent-4
+    volumes:
+      - ./wallets/mvx-agent-4.pem:/home/node/.openclaw/workspace/skills/multiversx/moltbot-starter-kit/wallet.pem
+
+  agent-5:
+    <<: *agent-common
+    container_name: mvx-agent-5
+    ports:
+      - "3009:3001"
+      - "3010:3002"
+    environment:
+      - AGENT_NAME=mvx-agent-5
+    volumes:
+      - ./wallets/mvx-agent-5.pem:/home/node/.openclaw/workspace/skills/multiversx/moltbot-starter-kit/wallet.pem
+
+  agent-6:
+    <<: *agent-common
+    container_name: mvx-agent-6
+    ports:
+      - "3011:3001"
+      - "3012:3002"
+    environment:
+      - AGENT_NAME=mvx-agent-6
+    volumes:
+      - ./wallets/mvx-agent-6.pem:/home/node/.openclaw/workspace/skills/multiversx/moltbot-starter-kit/wallet.pem
+
+  agent-7:
+    <<: *agent-common
+    container_name: mvx-agent-7
+    ports:
+      - "3013:3001"
+      - "3014:3002"
+    environment:
+      - AGENT_NAME=mvx-agent-7
+    volumes:
+      - ./wallets/mvx-agent-7.pem:/home/node/.openclaw/workspace/skills/multiversx/moltbot-starter-kit/wallet.pem
+
+  agent-8:
+    <<: *agent-common
+    container_name: mvx-agent-8
+    ports:
+      - "3015:3001"
+      - "3016:3002"
+    environment:
+      - AGENT_NAME=mvx-agent-8
+    volumes:
+      - ./wallets/mvx-agent-8.pem:/home/node/.openclaw/workspace/skills/multiversx/moltbot-starter-kit/wallet.pem
+
+  agent-9:
+    <<: *agent-common
+    container_name: mvx-agent-9
+    ports:
+      - "3017:3001"
+      - "3018:3002"
+    environment:
+      - AGENT_NAME=mvx-agent-9
+    volumes:
+      - ./wallets/mvx-agent-9.pem:/home/node/.openclaw/workspace/skills/multiversx/moltbot-starter-kit/wallet.pem
+
+  agent-10:
+    <<: *agent-common
+    container_name: mvx-agent-10
+    ports:
+      - "3019:3001"
+      - "3020:3002"
+    environment:
+      - AGENT_NAME=mvx-agent-10
+    volumes:
+      - ./wallets/mvx-agent-10.pem:/home/node/.openclaw/workspace/skills/multiversx/moltbot-starter-kit/wallet.pem
