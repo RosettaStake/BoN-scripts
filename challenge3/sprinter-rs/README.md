@@ -1,4 +1,4 @@
-WINDOW A:
+**WINDOW A:**
 
   cargo run --release create-wallets --wallets-dir ./A --number-of-wallets 498 --balanced
   
@@ -6,7 +6,7 @@ WINDOW A:
   
   cargo run --release transfer-all-cross-shards --wallets-dir ./A --batch-size 4 --amount 1 --sleep-time 0 --sign-threads 8 --send-parallelism 8
 
-WINDOW B:
+**WINDOW B:**
 
   cargo run --release create-wallets --wallets-dir ./B --number-of-wallets 498 --balanced
   
