@@ -9,7 +9,7 @@
   # 2. Fund small amount for deploy gas (~0.1 EGLD/wallet = 10 EGLD)
   sprinter fund --wallets-dir wallets/ --whale BoN.pem --amount 10000000000000000000
                                                                                                                                     
-  # 3. Deploy forwarders (1 per wallet, batches of 20)
+  # 3. Deploy forwarders (1 per shard, batches of 20)
   sprinter challenge4 deploy --wallets-dir wallets/ --wasm-path forwarder-blind-bon.wasm                                            
                                                                                                                                     
   # 4. Collect remaining EGLD back
