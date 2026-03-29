@@ -1,6 +1,7 @@
+  # Build
   cargo build --release
 
-  # Alias                                                                                                                           
+  # Set alias                                                                                                                           
   alias sprinter='./target/release/sprinter'                                                                                        
                                                             
   # 1. Create wallets (20 S0, 60 S1, 20 S2)                                                                                         
